@@ -1,4 +1,5 @@
 ﻿using Entity;
+using Entity.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace Services
 {
     public interface IProductoService
     {
-        Task<Producto> GetProductoByIdAsync(int id);
-        Task<IEnumerable<Producto>> GetAllProductosAsync();
-        Task<IEnumerable<Producto>> GetProductosByPriceRangeAsync(decimal minPrice, decimal maxPrice);
-        Task CreateProductoAsync(Producto producto);
-        Task UpdateProductoAsync(Producto producto);
-        Task DeleteProductoAsync(int id);
+        Task<Result<Producto>> GetProductoByIdAsync(int id);
+        Task<ResultList<Producto>> GetAllProductosAsync();
+        Task<ResultList<Producto>> GetProductosByPriceRangeAsync(decimal minPrice, decimal maxPrice);
+        Task<Result<Producto>> CreateProductoAsync(Producto producto);
+        Task<Result<Producto>> UpdateProductoAsync(Producto producto);
+        Task<Result<bool>> DeleteProductoAsync(int id);
     }
 }
