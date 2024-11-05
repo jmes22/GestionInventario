@@ -1,10 +1,12 @@
 using Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using System.ComponentModel.DataAnnotations;
 
 namespace GestionProductosAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ProductoController : ControllerBase
@@ -16,6 +18,7 @@ namespace GestionProductosAPI.Controllers
             _productoService = productoService;
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProducto(int id)
         {
@@ -34,6 +37,7 @@ namespace GestionProductosAPI.Controllers
             });
         }
 
+        [Authorize]
         [HttpGet("pricerange")]
         public async Task<IActionResult> GetProductosByPriceRange([FromQuery] decimal minPrice, [FromQuery] decimal maxPrice)
         {
@@ -45,6 +49,7 @@ namespace GestionProductosAPI.Controllers
             });
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateProducto(Producto producto)
         {
@@ -52,6 +57,7 @@ namespace GestionProductosAPI.Controllers
             return CreatedAtAction(nameof(GetProducto), new { id = result.Data.ProductoId }, result.Data);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProducto(int id, Producto producto)
         {
@@ -59,6 +65,7 @@ namespace GestionProductosAPI.Controllers
             return Ok(result.Data);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProducto(int id)
         {
