@@ -9,6 +9,7 @@ namespace Repository
     public interface IUnitOfWork : IDisposable
     {
         IProductoRepository Productos { get; }
+        IUsuarioRepository Usuarios { get; }
         Task<int> CompleteAsync();
     }
 }

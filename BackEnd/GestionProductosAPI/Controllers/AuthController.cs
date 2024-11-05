@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -13,28 +14,25 @@ namespace GestionProductosAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        public AuthController(IConfiguration configuration)
+        private readonly IUsuarioService _usuarioService;
+
+        public AuthController(IConfiguration configuration,
+            IUsuarioService usuarioService)
         {
             _configuration = configuration;
+            _usuarioService = usuarioService;
         }
 
         [HttpPost("login")]
-        public IActionResult Login(UserCredentials credentials)
+        public async Task<IActionResult> Login(Entity.Usuario usuario)
         {
-            // Aquí debes validar las credenciales del usuario y obtener la información del usuario autenticado
-            var user = new
-            {
-                Id = 1,
-                Username = "myuser",
-                Email = "myuser@example.com"
-            };
+            var user = await _usuarioService.GetUsuarioAsync(usuario);
 
             var claims = new[]
             {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Username),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        };
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -46,13 +44,10 @@ namespace GestionProductosAPI.Controllers
                 expires: DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["Jwt:ExpireMinutes"])),
                 signingCredentials: creds);
 
-            return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+            return Ok(new {
+                user,
+                token = new JwtSecurityTokenHandler().WriteToken(token)
+            });
         }
-    }
-
-    public class UserCredentials
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
     }
 }

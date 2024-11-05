@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public class UserCredentials
+    public class Usuario
     {
-        public string Username { get; set; }
+        public int UsuarioId { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
     }
 }

@@ -38,6 +38,22 @@ namespace Repository.Data
                 entity.Property(e => e.Cantidad)
                     .HasColumnType("numeric(18, 0)");
             });
+
+            modelBuilder.Entity<Usuario>(entity =>
+            {
+                entity.ToTable("Usuario");
+                entity.HasKey(e => e.UsuarioId);
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
         }
     }
 }

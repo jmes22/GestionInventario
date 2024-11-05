@@ -1,0 +1,8 @@
+CREATE TABLE [GestionDeInventario].[dbo].[Usuario] (
+    UsuarioId INT PRIMARY KEY IDENTITY(1,1),
+    Email NVARCHAR(100) NOT NULL,
+    Password NVARCHAR(100) NOT NULL
+);
+
+INSERT INTO [GestionDeInventario].[dbo].[Usuario] (Email, Password)
+VALUES ('user@example.com', 'securePassword123');

@@ -47,7 +47,7 @@ namespace GestionProductosAPI.Middleware
                     errorDetails.ExceptionType = "Validation Error";
                     break;
 
-                case KeyNotFoundException notFoundEx:
+                case NotFoundException notFoundEx:
                     context.Response.StatusCode = StatusCodes.Status404NotFound;
                     errorDetails.Message = notFoundEx.Message;
                     errorDetails.ExceptionType = "Not Found";

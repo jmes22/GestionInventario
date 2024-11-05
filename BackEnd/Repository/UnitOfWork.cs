@@ -12,6 +12,7 @@ namespace Repository
     {
         private readonly ApplicationDbContext _context;
         private IProductoRepository _productoRepository;
+        private IUsuarioRepository _usuarioRepository;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -19,6 +20,7 @@ namespace Repository
         }
 
         public IProductoRepository Productos => _productoRepository ??= new ProductoRepository(_context);
+        public IUsuarioRepository Usuarios => _usuarioRepository ??= new UsuarioRepository(_context);
 
         public async Task<int> CompleteAsync()
         {
