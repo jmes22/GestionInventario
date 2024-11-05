@@ -1,3 +1,4 @@
+using GestionProductosAPI.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Data;
@@ -19,6 +20,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
 
 var app = builder.Build();
+
+app.UseGlobalExceptionHandler();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
