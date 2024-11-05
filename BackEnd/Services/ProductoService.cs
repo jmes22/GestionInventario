@@ -33,9 +33,9 @@ namespace Services
             return ResultList<Producto>.Success(list, list.Count);
         }
 
-        public async Task<ResultList<Producto>> GetProductosByPriceRangeAsync(decimal minPrice, decimal maxPrice)
+        public async Task<ResultList<Producto>> GetProductosByNombre(string nombre)
         {
-            var productos = await _unitOfWork.Productos.GetProductosByPriceRangeAsync(minPrice, maxPrice);
+            var productos = await _unitOfWork.Productos.GetProductosByNombre(nombre);
             var list = productos.ToList();
             return ResultList<Producto>.Success(list, list.Count);
         }

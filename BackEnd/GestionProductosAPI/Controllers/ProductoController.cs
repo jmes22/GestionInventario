@@ -38,10 +38,10 @@ namespace GestionProductosAPI.Controllers
         }
 
         [Authorize]
-        [HttpGet("pricerange")]
-        public async Task<IActionResult> GetProductosByPriceRange([FromQuery] decimal minPrice, [FromQuery] decimal maxPrice)
+        [HttpGet("{nombre} : string")]
+        public async Task<IActionResult> GetProductosByNombre(string nombre)
         {
-            var result = await _productoService.GetProductosByPriceRangeAsync(minPrice, maxPrice);
+            var result = await _productoService.GetProductosByNombre(nombre);
             return Ok(new
             {
                 Data = result.Data,

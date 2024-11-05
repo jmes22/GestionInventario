@@ -15,9 +15,9 @@ namespace Repository
         {
         }
 
-        public async Task<IEnumerable<Producto>> GetProductosByPriceRangeAsync(decimal minPrice, decimal maxPrice)
+        public async Task<IEnumerable<Producto>> GetProductosByNombre(string nombre)
         {
-            return await _dbSet.Where(p => p.Precio >= minPrice && p.Precio <= maxPrice).ToListAsync();
+            return await _dbSet.Where(p => p.Nombre.Contains(nombre)).ToListAsync();
         }
     }
 }

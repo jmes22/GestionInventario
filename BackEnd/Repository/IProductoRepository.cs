@@ -9,6 +9,6 @@ namespace Repository
 {
     public interface IProductoRepository : IGenericRepository<Producto>
     {
-        Task<IEnumerable<Producto>> GetProductosByPriceRangeAsync(decimal minPrice, decimal maxPrice);
+        Task<IEnumerable<Producto>> GetProductosByNombre(string nombre);
     }
 }

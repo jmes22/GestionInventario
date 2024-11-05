@@ -12,7 +12,7 @@ namespace Services
     {
         Task<Result<Producto>> GetProductoByIdAsync(int id);
         Task<ResultList<Producto>> GetAllProductosAsync();
-        Task<ResultList<Producto>> GetProductosByPriceRangeAsync(decimal minPrice, decimal maxPrice);
+        Task<ResultList<Producto>> GetProductosByNombre(string nombre);
         Task<Result<Producto>> CreateProductoAsync(Producto producto);
         Task<Result<Producto>> UpdateProductoAsync(int id, Producto producto);
         Task<Result<bool>> DeleteProductoAsync(int id);
