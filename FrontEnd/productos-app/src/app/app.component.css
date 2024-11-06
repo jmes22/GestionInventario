@@ -1,0 +1,17 @@
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .spacer {
+    flex: 1 1 auto;
+  }
+  mat-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .content {
+    flex: 1;
+    padding: 20px;
+  }

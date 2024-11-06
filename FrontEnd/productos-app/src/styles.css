@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Estilos para los formularios */
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+/* Estilos para las tablas */
+.table-container {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.mat-table {
+  width: 100%;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.mat-cell {
+  padding: 8px;
+}
+
+/* Estilos para los botones */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* Estilos para mensajes de error */
+.error-message {
+  color: #f44336;
+  margin: 8px 0;
+}
+
+/* Estilos para los spinners de carga */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}

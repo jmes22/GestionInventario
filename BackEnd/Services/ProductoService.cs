@@ -62,7 +62,11 @@ namespace Services
             if (existingProducto == null)
                 throw new NotFoundException($"No se encontró el producto con ID: {producto.ProductoId}");
 
-            await _unitOfWork.Productos.UpdateAsync(producto);
+            existingProducto.Nombre = producto.Nombre;
+            existingProducto.Precio = producto.Precio;
+            existingProducto.Cantidad = producto.Cantidad;
+
+            await _unitOfWork.Productos.UpdateAsync(existingProducto);
             await _unitOfWork.CompleteAsync();
             return Result<Producto>.Success(producto);
         }

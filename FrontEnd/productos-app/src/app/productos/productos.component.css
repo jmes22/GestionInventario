@@ -1,0 +1,52 @@
+.productos-container {
+  padding: 20px;
+}
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.search-field {
+  width: 300px;
+}
+.table-container {
+  position: relative;
+  min-height: 200px;
+}
+table {
+  width: 100%;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.form-card {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+}
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+.mat-column-acciones {
+  text-align: right;
+  padding-right: 16px;
+}
+td.mat-cell {
+  padding: 16px;
+}

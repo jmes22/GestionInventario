@@ -1,4 +1,5 @@
 using Entity;
+using Entity.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -20,57 +21,49 @@ namespace GestionProductosAPI.Controllers
 
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProducto(int id)
+        public async Task<ActionResult<Result<Producto>>> GetProducto(int id)
         {
             var result = await _productoService.GetProductoByIdAsync(id);
-            return Ok(result.Data);
+            return Ok(result);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProductos()
+        public async Task<ActionResult<Result<IEnumerable<Producto>>>> GetProductos()
         {
             var result = await _productoService.GetAllProductosAsync();
-            return Ok(new
-            {
-                Data = result.Data,
-                TotalRecords = result.TotalRecords
-            });
+            return Ok(result);
         }
 
         [Authorize]
-        [HttpGet("{nombre} : string")]
-        public async Task<IActionResult> GetProductosByNombre(string nombre)
+        [HttpGet("search")]  // Corregido el path
+        public async Task<ActionResult<Result<IEnumerable<Producto>>>> GetProductos([FromQuery] string? nombre = null)
         {
             var result = await _productoService.GetProductosByNombre(nombre);
-            return Ok(new
-            {
-                Data = result.Data,
-                TotalRecords = result.TotalRecords
-            });
+            return Ok(result);
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreateProducto(Producto producto)
+        public async Task<ActionResult<Result<Producto>>> CreateProducto(Producto producto)
         {
             var result = await _productoService.CreateProductoAsync(producto);
-            return CreatedAtAction(nameof(GetProducto), new { id = result.Data.ProductoId }, result.Data);
+            return Created($"api/Producto/{result.Data.ProductoId}", result);  
         }
 
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProducto(int id, Producto producto)
+        public async Task<ActionResult<Result<Producto>>> UpdateProducto(int id, Producto producto)
         {
             var result = await _productoService.UpdateProductoAsync(id, producto);
-            return Ok(result.Data);
+            return Ok(result); 
         }
 
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProducto(int id)
+        public async Task<ActionResult<Result<bool>>> DeleteProducto(int id)
         {
             var result = await _productoService.DeleteProductoAsync(id);
-            return NoContent();
+            return Ok(result); 
         }
     }
 }
